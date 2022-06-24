@@ -56,14 +56,7 @@ function getSeaPercent(x, y, radius) {
 	return seaPixels / denom
 }
 
-
-canvas.addEventListener('click', function (event) {
-	let {x, y, pickColor} = pick(event);
-	console.log(x, y, pickColor);
-	resetCanvas();
-
-	let radius = 50
-	const seaPercent = getSeaPercent(x, y, radius);
+function showSingleRadiusWaterContent(x, y, radius, seaPercent) {
 
 	ctx.beginPath();
 	ctx.arc(x, y, radius, 0, 2 * Math.PI);
@@ -71,6 +64,24 @@ canvas.addEventListener('click', function (event) {
 
 	ctx.beginPath();
 	ctx.fillStyle = rgba(seaColor.map(x => x * seaPercent));
-	ctx.arc(x, y, radius - 5, 0, 2 * Math.PI);
+	ctx.arc(x, y, radius - 2, 0, 2 * Math.PI);
 	ctx.fill();
+}
+
+canvas.addEventListener('click', function (event) {
+	let {x, y, pickColor} = pick(event);
+	console.log(x, y, pickColor);
+	resetCanvas();
+	let radius = 10
+	// const seaPercent = getSeaPercent(x, y, radius);
+	// showSingleRadiusWaterContent(x, y, radius)
+	for (let radius = 10; radius < 1000; radius+=20) {
+		resetCanvas();
+		const seaPercent = getSeaPercent(x, y, radius);
+		showSingleRadiusWaterContent(x, y, radius, seaPercent)
+		if (seaPercent > 0.1) {
+			console.log('final', radius, seaPercent)
+			break;
+		}
+	}
 });

@@ -4,9 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "node-dev shape/server.mjs"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@turf/point-to-line-distance": "^6.5.0",
+    "@turf/turf": "^6.5.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "shapefile": "^0.6.6",
+    "shapefile.js": "^0.3.6"
+  }
 }
